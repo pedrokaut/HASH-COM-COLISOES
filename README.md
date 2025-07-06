@@ -25,8 +25,10 @@ Uma **tabela hash** é uma estrutura de dados eficiente que permite armazenar e 
 
 ## Funcionalidades
 
-##integrantes
+## integrantes
+
 Pedro Victor Soares Gonçalo
+
 Pablo Ryan Lopes Vieira
 
 
