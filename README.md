@@ -4,7 +4,6 @@
 ![Status](https://img.shields.io/badge/Status-Em%20desenvolvimento-yellow)
 ![Licença](https://img.shields.io/badge/Licen%C3%A7a-MIT-green.svg)
 ![Suporte](https://img.shields.io/badge/Suporte-Windows%20%7C%20Linux-blue)
-![Último Commit](https://img.shields.io/github/last-commit/seu-usuario/seu-repositorio)
 
 
 # 📦 Estrutura de Dados: Tabela Hash em C
