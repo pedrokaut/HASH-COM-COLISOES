@@ -6,7 +6,7 @@
 ![Suporte](https://img.shields.io/badge/Suporte-Windows%20%7C%20Linux-blue)
 
 
-# 📦 Estrutura de Dados: Tabela Hash em C
+# Estrutura de Dados: Tabela Hash em C
 
 Este repositório contém a implementação de **tabelas hash** em linguagem **C**, incluindo as principais técnicas de **A definir**, como **A definir** e **A definir**, utilizando duas abordagens distintas de código para fins didáticos e comparativos.
 
