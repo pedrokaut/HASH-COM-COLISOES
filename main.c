@@ -14,3 +14,11 @@ typedef struct No {
 typedef struct {
     No* lista[TAM_TABELA];
 } TabelaHash;
+
+int hash(const char* chave) {
+unsigned long hash = 0;
+for (int i = 0; chave[i] != '\0'; i++) {
+hash = hash * 31 + chave[i];
+}
+return (int)(hash % TAM_TABELA);
+}
