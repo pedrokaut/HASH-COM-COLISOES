@@ -22,3 +22,23 @@ hash = hash * 31 + chave[i];
 }
 return (int)(hash % TAM_TABELA);
 }
+
+int main() {
+    TabelaHash th;
+    inicializar(&th);
+
+    inserir(&th, "joao", 10);
+
+
+    imprimir(&th);
+
+    int valor;
+    if (buscar(&th, "ana", &valor))
+        printf("Valor de ana: %d\n", valor);
+
+    remover(&th, "maria");
+    imprimir(&th);
+
+    liberar(&th); // Libera memória
+    return 0;
+}
