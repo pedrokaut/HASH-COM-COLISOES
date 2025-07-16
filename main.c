@@ -42,3 +42,21 @@ int main() {
     liberar(&th); // Libera memória
     return 0;
 }
+
+void inserir(TabelaHash* th, const char* chave, int valor) {
+    int indice = hash(chave);
+    No* atual = th->lista[indice];
+    while (atual != NULL) {
+        if (strcmp(atual->chave, chave) == 0) {
+            atual->valor = valor;
+            return;
+        }
+        atual = atual->prox;
+    }
+    No* novo = (No*)malloc(sizeof(No));
+    strncpy(novo->chave, chave, TAM_CHAVE - 1);
+    novo->chave[TAM_CHAVE - 1] = '\0'; // Garante terminação
+    novo->valor = valor;
+    novo->prox = th->lista[indice];
+    th->lista[indice] = novo;
+}
