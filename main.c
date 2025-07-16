@@ -24,6 +24,7 @@ return (int)(hash % TAM_TABELA);
 }
 
 //area dos prototipos das funcao
+void inicializar(TabelaHash* th);
 void inserir(TabelaHash* th, const char* chave, int valor);
 
 int main() {
@@ -62,4 +63,9 @@ void inserir(TabelaHash* th, const char* chave, int valor) {
     novo->valor = valor;
     novo->prox = th->lista[indice];
     th->lista[indice] = novo;
+}
+
+void inicializar(TabelaHash* th) {
+    for (int i = 0; i < TAM_TABELA; i++)
+        th->lista[i] = NULL;
 }
