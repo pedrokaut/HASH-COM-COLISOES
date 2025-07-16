@@ -23,6 +23,9 @@ hash = hash * 31 + chave[i];
 return (int)(hash % TAM_TABELA);
 }
 
+//area dos prototipos das funcao
+void inserir(TabelaHash* th, const char* chave, int valor);
+
 int main() {
     TabelaHash th;
     inicializar(&th);
