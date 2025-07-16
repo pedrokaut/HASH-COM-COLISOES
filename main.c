@@ -43,7 +43,7 @@ int main() {
     remover(&th, "maria");
     imprimir(&th);
 
-    liberar(&th); // Libera memória
+    liberar(&th); 
     return 0;
 }
 
@@ -59,7 +59,7 @@ void inserir(TabelaHash* th, const char* chave, int valor) {
     }
     No* novo = (No*)malloc(sizeof(No));
     strncpy(novo->chave, chave, TAM_CHAVE - 1);
-    novo->chave[TAM_CHAVE - 1] = '\0'; // Garante terminação
+    novo->chave[TAM_CHAVE - 1] = '\0';
     novo->valor = valor;
     novo->prox = th->lista[indice];
     th->lista[indice] = novo;
