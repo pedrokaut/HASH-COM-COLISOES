@@ -15,32 +15,26 @@ typedef struct {
     No* lista[TAM_TABELA];
 } TabelaHash;
 
-int hash(const char* chave) {
-unsigned long hash = 0;
-for (int i = 0; chave[i] != '\0'; i++) {
-hash = hash * 31 + chave[i];
-}
-return (int)(hash % TAM_TABELA);
-}
 
 //area dos prototipos das funcao
 void inicializar(TabelaHash* th);
 void inserir(TabelaHash* th, const char* chave, int valor);
+int hashDobra(const char* chave);
 
 int main() {
     TabelaHash th;
     inicializar(&th);
 
-    inserir(&th, "joao", 10);
-
-
+    inserir(&th, "ana", 10);
+    
+    
     imprimir(&th);
 
     int valor;
     if (buscar(&th, "ana", &valor))
         printf("Valor de ana: %d\n", valor);
 
-    remover(&th, "maria");
+    remover(&th, "ana");
     imprimir(&th);
 
     liberar(&th); 
@@ -68,4 +62,27 @@ void inserir(TabelaHash* th, const char* chave, int valor) {
 void inicializar(TabelaHash* th) {
     for (int i = 0; i < TAM_TABELA; i++)
         th->lista[i] = NULL;
-}
+    }
+
+int hashDobra(const char* chave) {
+        int soma = 0;
+        int agrupado = 0;
+        int contador = 0;
+    
+        for (int i = 0; chave[i] != '\0'; i++) {
+            agrupado = agrupado * 100 + (int)chave[i];
+            contador++;
+    
+            if (contador == 2) {
+                soma += agrupado;
+                agrupado = 0;
+                contador = 0;
+            }
+        }
+    
+        if (contador > 0) {
+            soma += agrupado;
+        }
+    
+        return soma % TAM_TABELA;
+    }
