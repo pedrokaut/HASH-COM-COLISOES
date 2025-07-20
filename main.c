@@ -33,7 +33,7 @@ int main() {
     inserir(&th, "ana", 10);
     
     
-    imprimir(&th);
+    imprimirTabela(&th);
 
     int valor;
     if (buscar(&th, "ana", &valor))
@@ -42,7 +42,7 @@ int main() {
     remover(&th, "ana");
     imprimir(&th);
 
-    liberar(&th); 
+    liberarTabela(&th); 
     return 0;
 }
 
