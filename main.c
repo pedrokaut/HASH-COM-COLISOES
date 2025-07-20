@@ -20,6 +20,8 @@ typedef struct {
 void inicializar(TabelaHash* th);
 void inserir(TabelaHash* th, const char* chave, int valor);
 int hashDobra(const char* chave);
+int buscar(TabelaHash* tabela, const char* chave, int* valor);
+
 
 int main() {
     TabelaHash th;
@@ -86,3 +88,17 @@ int hashDobra(const char* chave) {
     
         return soma % TAM_TABELA;
     }
+
+int buscar(TabelaHash* tabela, const char* chave, int* valor) {
+    int indice = hashDobra(chave);
+    No* atual = tabela->elementos[indice];
+
+    while (atual != NULL) {
+        if (strcmp(atual->chave, chave) == 0) {
+            *valor = atual->valor;
+            return 1;
+        }
+        atual = atual->prox;
+    }
+    return 0;
+}
