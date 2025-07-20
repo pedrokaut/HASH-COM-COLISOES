@@ -21,6 +21,7 @@ void inicializar(TabelaHash* th);
 void inserir(TabelaHash* th, const char* chave, int valor);
 int hashDobra(const char* chave);
 int buscar(TabelaHash* tabela, const char* chave, int* valor);
+int remover(TabelaHash* tabela, const char* chave);
 
 
 int main() {
@@ -44,7 +45,7 @@ int main() {
 }
 
 void inserir(TabelaHash* th, const char* chave, int valor) {
-    int indice = hash(chave);
+    int indice = hashDobra(chave);//alteração da variavel antes chamada de "hash" agora "hashDobra"
     No* atual = th->lista[indice];
     while (atual != NULL) {
         if (strcmp(atual->chave, chave) == 0) {
@@ -91,13 +92,34 @@ int hashDobra(const char* chave) {
 
 int buscar(TabelaHash* tabela, const char* chave, int* valor) {
     int indice = hashDobra(chave);
-    No* atual = tabela->elementos[indice];
+    No* atual = tabela->lista[indice];// troca da variavel antes chamada "elementos" agora "lista"
 
     while (atual != NULL) {
         if (strcmp(atual->chave, chave) == 0) {
             *valor = atual->valor;
             return 1;
         }
+        atual = atual->prox;
+    }
+    return 0;
+}
+
+int remover(TabelaHash* tabela, const char* chave) {
+    int indice = hashDobra(chave);
+    No* atual = tabela->lista[indice];
+    No* anterior = NULL;
+
+    while (atual != NULL) {
+        if (strcmp(atual->chave, chave) == 0) {
+            if (anterior == NULL) {
+                tabela->lista[indice] = atual->prox;
+            } else {
+                anterior->prox = atual->prox;
+            }
+            free(atual);
+            return 1;
+        }
+        anterior = atual;
         atual = atual->prox;
     }
     return 0;
