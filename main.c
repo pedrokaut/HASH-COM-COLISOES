@@ -33,15 +33,21 @@ int main() {
     inicializar(&th);
 
     inserir(&th, "ana", 10);
-    
+    inserir(&th, "aan", 20);
+    inserir(&th, "nan", 30);
+    inserir(&th, "mar", 40);
+    inserir(&th, "ram", 50);
     
     imprimirTabela(&th);
 
     int valor;
-    if (buscar(&th, "ana", &valor))
-        printf("Valor de ana: %d\n", valor);
+    if (buscar(&th, "aan", &valor))
+        printf("Valor de 'aan': %d\n", valor);
+    else
+        printf("Chave 'aan' não encontrada.\n");
 
     remover(&th, "ana");
+    printf("\nApós remover 'ana':\n");
     imprimirTabela(&th);
 
     liberarTabela(&th); 
@@ -51,13 +57,16 @@ int main() {
 void inserir(TabelaHash* th, const char* chave, int valor) {
     int indice = hashDobra(chave);//alteração da variavel antes chamada de "hash" agora "hashDobra"
     No* atual = th->lista[indice];
+
     while (atual != NULL) {
         if (strcmp(atual->chave, chave) == 0) {
             atual->valor = valor;
+            printf("Atualizando chave '%s' no índice %d com valor %d\n", chave, indice, valor);
             return;
         }
         atual = atual->prox;
     }
+    
     No* novo = (No*)malloc(sizeof(No));
     strncpy(novo->chave, chave, TAM_CHAVE - 1);
     novo->chave[TAM_CHAVE - 1] = '\0';
