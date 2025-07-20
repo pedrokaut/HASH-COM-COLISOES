@@ -22,6 +22,7 @@ void inserir(TabelaHash* th, const char* chave, int valor);
 int hashDobra(const char* chave);
 int buscar(TabelaHash* tabela, const char* chave, int* valor);
 int remover(TabelaHash* tabela, const char* chave);
+void imprimirTabela(TabelaHash* tabela);
 
 
 int main() {
@@ -123,4 +124,17 @@ int remover(TabelaHash* tabela, const char* chave) {
         atual = atual->prox;
     }
     return 0;
+}
+
+void imprimirTabela(TabelaHash* tabela) {
+    printf("Tabela Hash (método da dobra):\n");
+    for (int i = 0; i < TAM_TABELA; i++) {
+        printf("[%d]:", i);
+        No* atual = tabela->lista[i];
+        while (atual != NULL) {
+            printf(" (%s, %d)", atual->chave, atual->valor);
+            atual = atual->prox;
+        }
+        printf("\n");
+    }
 }
