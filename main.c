@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <locale.h>
 
 #define TAM_TABELA 10//definindo o tamanho da tabela
 #define TAM_CHAVE  50
@@ -27,6 +28,7 @@ void liberarTabela(TabelaHash* tabela);
 
 
 int main() {
+    setlocale(LC_ALL, "portuguese");
     TabelaHash th;
     inicializar(&th);
 
