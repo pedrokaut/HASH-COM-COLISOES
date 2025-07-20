@@ -68,11 +68,22 @@ void inserir(TabelaHash* th, const char* chave, int valor) {
     }
     
     No* novo = (No*)malloc(sizeof(No));
+    if (novo == NULL) {
+        fprintf(stderr, "Erro de alocação de memória.\n");
+        exit(EXIT_FAILURE);
+    }
     strncpy(novo->chave, chave, TAM_CHAVE - 1);
     novo->chave[TAM_CHAVE - 1] = '\0';
     novo->valor = valor;
+
+    if (th->lista[indice] != NULL) {
+        printf("Colisão detectada ao inserir chave '%s' no índice %d\n", chave, indice);
+    }
+
     novo->prox = th->lista[indice];
     th->lista[indice] = novo;
+
+    printf("Inserindo chave '%s' no índice %d com valor %d\n", chave, indice, valor);
 }
 
 void inicializar(TabelaHash* th) {
