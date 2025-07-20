@@ -40,7 +40,7 @@ int main() {
         printf("Valor de ana: %d\n", valor);
 
     remover(&th, "ana");
-    imprimir(&th);
+    imprimirTabela(&th);
 
     liberarTabela(&th); 
     return 0;
