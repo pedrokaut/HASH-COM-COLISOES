@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <locale.h>
 
 #define TAM_TABELA 10//definindo o tamanho da tabela
 #define TAM_CHAVE  50
@@ -27,19 +28,26 @@ void liberarTabela(TabelaHash* tabela);
 
 
 int main() {
+    setlocale(LC_ALL, "portuguese");
     TabelaHash th;
     inicializar(&th);
 
     inserir(&th, "ana", 10);
-    
+    inserir(&th, "aan", 20);
+    inserir(&th, "nan", 30);
+    inserir(&th, "mar", 40);
+    inserir(&th, "ram", 50);
     
     imprimirTabela(&th);
 
     int valor;
-    if (buscar(&th, "ana", &valor))
-        printf("Valor de ana: %d\n", valor);
+    if (buscar(&th, "aan", &valor))
+        printf("Valor de 'aan': %d\n", valor);
+    else
+        printf("Chave 'aan' não encontrada.\n");
 
     remover(&th, "ana");
+    printf("\nApós remover 'ana':\n");
     imprimirTabela(&th);
 
     liberarTabela(&th); 
@@ -49,19 +57,33 @@ int main() {
 void inserir(TabelaHash* th, const char* chave, int valor) {
     int indice = hashDobra(chave);//alteração da variavel antes chamada de "hash" agora "hashDobra"
     No* atual = th->lista[indice];
+
     while (atual != NULL) {
         if (strcmp(atual->chave, chave) == 0) {
             atual->valor = valor;
+            printf("Atualizando chave '%s' no índice %d com valor %d\n", chave, indice, valor);
             return;
         }
         atual = atual->prox;
     }
+    
     No* novo = (No*)malloc(sizeof(No));
+    if (novo == NULL) {
+        fprintf(stderr, "Erro de alocação de memória.\n");
+        exit(EXIT_FAILURE);
+    }
     strncpy(novo->chave, chave, TAM_CHAVE - 1);
     novo->chave[TAM_CHAVE - 1] = '\0';
     novo->valor = valor;
+
+    if (th->lista[indice] != NULL) {
+        printf("Colisão detectada ao inserir chave '%s' no índice %d\n", chave, indice);
+    }
+
     novo->prox = th->lista[indice];
     th->lista[indice] = novo;
+
+    printf("Inserindo chave '%s' no índice %d com valor %d\n", chave, indice, valor);
 }
 
 void inicializar(TabelaHash* th) {
